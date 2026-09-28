@@ -1,0 +1,1217 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sesión en línea 2 - Identificación de procesos</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #003d5c 0%, #00597a 50%, #007499 100%);
+            padding: 0;
+            margin: 0;
+            min-height: 100vh;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* Partículas flotantes animadas */
+        .floating-particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+            overflow: hidden;
+        }
+
+        .particle {
+            position: absolute;
+            font-size: 20px;
+            opacity: 0.15;
+            animation: float 15s infinite ease-in-out;
+        }
+
+        .particle:nth-child(1) {
+            left: 10%;
+            animation-delay: 0s;
+            top: 20%;
+        }
+
+        .particle:nth-child(2) {
+            left: 20%;
+            animation-delay: 2s;
+            top: 60%;
+        }
+
+        .particle:nth-child(3) {
+            left: 30%;
+            animation-delay: 4s;
+            top: 80%;
+        }
+
+        .particle:nth-child(4) {
+            left: 50%;
+            animation-delay: 1s;
+            top: 40%;
+        }
+
+        .particle:nth-child(5) {
+            left: 70%;
+            animation-delay: 3s;
+            top: 70%;
+        }
+
+        .particle:nth-child(6) {
+            left: 80%;
+            animation-delay: 5s;
+            top: 30%;
+        }
+
+        .particle:nth-child(7) {
+            left: 90%;
+            animation-delay: 2.5s;
+            top: 50%;
+        }
+
+        @keyframes float {
+
+            0%,
+            100% {
+                transform: translateY(0px) rotate(0deg);
+                opacity: 0.15;
+            }
+
+            25% {
+                transform: translateY(-30px) rotate(90deg);
+                opacity: 0.25;
+            }
+
+            50% {
+                transform: translateY(-60px) rotate(180deg);
+                opacity: 0.15;
+            }
+
+            75% {
+                transform: translateY(-30px) rotate(270deg);
+                opacity: 0.25;
+            }
+        }
+
+        .session-container {
+            width: 100%;
+            margin: 0;
+            background: #ffffff;
+            border-radius: 0;
+            overflow: visible;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+            animation: fadeInUp 0.8s ease-out;
+            position: relative;
+            z-index: 1;
+            min-height: 100vh;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .header-accent {
+            height: 5px;
+            background: linear-gradient(90deg, #39a900, #4cd137, #39a900, #4cd137);
+            background-size: 400% 100%;
+            animation: gradientFlow 4s ease infinite;
+        }
+
+        @keyframes gradientFlow {
+
+            0%,
+            100% {
+                background-position: 0% 50%;
+            }
+
+            50% {
+                background-position: 100% 50%;
+            }
+        }
+
+        .header-section {
+            background: linear-gradient(135deg, #003d5c 0%, #00597a 50%, #003d5c 100%);
+            padding: 5px 25px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 3px;
+        }
+
+        /* Efecto de código en movimiento en el header */
+        .header-section::before {
+            content: '{ } < /> [ ] ( ) ; : = + - * / % & | ! ? # $ @';
+            position: absolute;
+            top: 50%;
+            left: -100%;
+            right: -100%;
+            font-family: 'Courier New', monospace;
+            font-size: 40px;
+            color: rgba(57, 169, 0, 0.08);
+            white-space: nowrap;
+            animation: scrollCode 20s linear infinite;
+            transform: translateY(-50%);
+        }
+
+        @keyframes scrollCode {
+            from {
+                left: -100%;
+            }
+
+            to {
+                left: 100%;
+            }
+        }
+
+        .header-title-row {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            flex-wrap: wrap;
+            position: relative;
+            z-index: 1;
+        }
+
+        .header-section h1 {
+            color: #fff;
+            font-size: clamp(1.1rem, 2.8vw, 1.6rem);
+            font-weight: 700;
+            margin: 0;
+            animation: slideIn 0.8s ease-out 0.2s both;
+            line-height: 1.2;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateX(-50px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .header-section h1 .code-tag {
+            color: #39a900;
+            font-family: 'Courier New', monospace;
+            text-shadow: 0 0 10px rgba(57, 169, 0, 0.5);
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+
+            0%,
+            100% {
+                opacity: 1;
+            }
+
+            50% {
+                opacity: 0.7;
+            }
+        }
+
+        .header-section .subtitle {
+            color: #a4b0be;
+            font-size: clamp(0.75rem, 1.8vw, 0.9rem);
+            font-weight: 500;
+            position: relative;
+            z-index: 1;
+            animation: slideIn 0.8s ease-out 0.4s both;
+        }
+
+        .date-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            background: linear-gradient(135deg, #39a900, #4cd137);
+            color: white;
+            padding: 5px 12px;
+            border-radius: 18px;
+            font-weight: 600;
+            box-shadow: 0 3px 12px rgba(57, 169, 0, 0.4);
+            animation: bounceIn 0.8s ease-out 0.6s both;
+            font-size: 0.75rem;
+            white-space: nowrap;
+        }
+
+        @keyframes bounceIn {
+            0% {
+                transform: scale(0);
+                opacity: 0;
+            }
+
+            50% {
+                transform: scale(1.1);
+            }
+
+            100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        .content-wrapper {
+            display: flex;
+            flex-direction: column;
+            padding: 8px 0 10px 0;
+        }
+
+        .content-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 8px;
+            padding: 10px 0 0 0;
+        }
+
+        @media (min-width: 768px) {
+            .content-grid {
+                grid-template-columns: 1.5fr 1fr;
+                padding: 10px 20px 10px 20px;
+                align-items: start;
+            }
+        }
+
+        .main-content {
+            padding: 0 20px;
+        }
+
+        @media (min-width: 768px) {
+            .main-content {
+                padding: 0;
+            }
+        }
+
+        .main-content h3 {
+            color: #003d5c;
+            font-size: 0.95rem;
+            margin-bottom: 8px;
+            padding-left: 8px;
+            border-left: 4px solid #39a900;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            animation: slideIn 0.8s ease-out;
+        }
+
+        .greeting {
+            color: #636e72;
+            line-height: 1.5;
+            margin-bottom: 10px;
+            font-size: 0.9rem;
+        }
+
+        .evidence-list {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        .evidence-item {
+            background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+            border-left: 4px solid #39a900;
+            padding: 10px 12px;
+            border-radius: 8px;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+            animation: slideInLeft 0.6s ease-out;
+            animation-fill-mode: both;
+            min-height: fit-content;
+        }
+
+        .evidence-item:nth-child(1) {
+            animation-delay: 0.1s;
+        }
+
+        .evidence-item:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+
+        .evidence-item:nth-child(3) {
+            animation-delay: 0.3s;
+        }
+
+        .evidence-item:nth-child(4) {
+            animation-delay: 0.4s;
+        }
+
+        .evidence-item:nth-child(5) {
+            animation-delay: 0.5s;
+        }
+
+        @keyframes slideInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .evidence-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 0;
+            height: 100%;
+            background: linear-gradient(90deg, rgba(57, 169, 0, 0.08), transparent);
+            transition: width 0.4s ease;
+            z-index: 0;
+        }
+
+        .evidence-item:hover {
+            transform: translateX(8px) scale(1.02);
+            box-shadow: 0 10px 30px rgba(57, 169, 0, 0.2);
+            border-left-width: 8px;
+        }
+
+        .evidence-item:hover::before {
+            width: 100%;
+        }
+
+        .evidence-header {
+            display: flex;
+            align-items: flex-start;
+            gap: 8px;
+            margin-bottom: 0;
+            position: relative;
+            z-index: 1;
+        }
+
+        .evidence-icon {
+            background: linear-gradient(135deg, #39a900, #4cd137);
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 7px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.85rem;
+            box-shadow: 0 2px 8px rgba(57, 169, 0, 0.3);
+            transition: all 0.3s ease;
+            flex-shrink: 0;
+        }
+
+        .evidence-item:hover .evidence-icon {
+            transform: scale(1.1);
+        }
+
+        .evidence-content {
+            flex: 1;
+            min-width: 0;
+            display: grid;
+            grid-template-columns: auto 1fr;
+            gap: 10px;
+            align-items: start;
+        }
+
+        .evidence-left-column {
+            display: flex;
+            flex-direction: column;
+            gap: 3px;
+            min-width: 170px;
+        }
+
+        .evidence-code {
+            font-weight: 700;
+            color: #003d5c;
+            font-size: 0.75rem;
+            white-space: nowrap;
+        }
+
+        .evidence-dates {
+            font-size: 0.7rem;
+            color: #636e72;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            flex-wrap: wrap;
+        }
+
+        .evidence-description {
+            color: #2d3436;
+            line-height: 1.3;
+            font-size: 0.8rem;
+            align-self: start;
+        }
+
+        /* Si el texto es muy largo, las fechas van debajo del código y la descripción abajo */
+        @media (max-width: 1200px) {
+            .evidence-content {
+                grid-template-columns: 1fr;
+                gap: 3px;
+            }
+
+            .evidence-left-column {
+                min-width: 100%;
+            }
+        }
+
+        .evidence-dates i {
+            color: #39a900;
+        }
+
+        /* Material de formación - Nueva sección independiente encima de la quote */
+        .material-section {
+            background: #f8f9fa;
+            padding: 6px 25px;
+            border-top: 1px solid #e0e0e0;
+        }
+
+        .material-wrapper {
+            max-width: 100%;
+            margin: 0 auto;
+        }
+
+        .material-box {
+            background: linear-gradient(135deg, #fff9e6, #fffbf0);
+            border: 2px solid #ffd700;
+            border-radius: 10px;
+            padding: 8px 20px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            box-shadow: 0 4px 15px rgba(255, 215, 0, 0.2);
+            animation: fadeIn 0.8s ease-out 0.8s both;
+            transition: all 0.3s ease;
+        }
+
+        .material-box:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(255, 215, 0, 0.3);
+        }
+
+        .material-box i {
+            color: #f39c12;
+            font-size: 1.8rem;
+            flex-shrink: 0;
+        }
+
+        .material-box strong {
+            color: #e67e22;
+            font-size: 0.9rem;
+        }
+
+        .material-box-text {
+            color: #2c3e50;
+            font-size: 0.85rem;
+            line-height: 1.5;
+        }
+
+        .sidebar {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            padding: 0 20px 0 0;
+        }
+
+        @media (min-width: 768px) {
+            .sidebar {
+                align-self: stretch;
+                justify-content: center;
+            }
+        }
+
+        @media (max-width: 767px) {
+            .sidebar {
+                padding: 0 20px;
+            }
+        }
+
+        .sidebar-image {
+            width: 80%;
+            max-width: 100%;
+            height: auto;
+            object-fit: contain;
+            transition: all 0.4s ease;
+        }
+
+        @keyframes zoomIn {
+            from {
+                opacity: 0;
+                transform: scale(0.8);
+            }
+
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .sidebar-image:hover {
+            transform: scale(1.05) rotate(1deg);
+        }
+
+        .meeting-card {
+            background: linear-gradient(135deg, #003d5c 0%, #00597a 100%);
+            padding: 15px;
+            border-radius: 15px;
+            text-align: center;
+            color: white;
+            box-shadow: 0 10px 30px rgba(0, 61, 92, 0.4);
+            position: relative;
+            overflow: hidden;
+            animation: slideInLeft 0.8s ease-out 0.4s both;
+            flex-shrink: 0;
+        }
+
+        @keyframes slideInRight {
+            from {
+                opacity: 0;
+                transform: translateX(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        /* Efecto de ondas en la tarjeta de reunión */
+        .meeting-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(57, 169, 0, 0.1) 0%, transparent 70%);
+            animation: ripple 4s linear infinite;
+        }
+
+        @keyframes ripple {
+            0% {
+                transform: scale(0.8);
+                opacity: 1;
+            }
+
+            100% {
+                transform: scale(1.5);
+                opacity: 0;
+            }
+        }
+
+        .meeting-card h3 {
+            font-size: 1.1rem;
+            margin-bottom: 10px;
+            color: white;
+            position: relative;
+            z-index: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 7px;
+        }
+
+        .meeting-icon {
+            font-size: 1.3rem;
+            animation: bounce 2s ease-in-out infinite;
+        }
+
+        @keyframes bounce {
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-8px);
+            }
+        }
+
+        .meeting-time {
+            font-size: 2.2rem;
+            font-weight: 800;
+            margin: 12px 0;
+            background: linear-gradient(45deg, #39a900, #4cd137, #39a900);
+            background-size: 200% 200%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: 0 0 30px rgba(57, 169, 0, 0.5);
+            animation: gradientText 3s ease infinite;
+            position: relative;
+            z-index: 1;
+        }
+
+        @keyframes gradientText {
+
+            0%,
+            100% {
+                background-position: 0% 50%;
+            }
+
+            50% {
+                background-position: 100% 50%;
+            }
+        }
+
+        .meeting-description {
+            color: #a4b0be;
+            margin-bottom: 15px;
+            font-size: 0.9rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .meeting-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: linear-gradient(135deg, #39a900, #4cd137);
+            color: white;
+            padding: 12px 28px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 0.95rem;
+            margin-top: 6px;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 6px 20px rgba(57, 169, 0, 0.4);
+            position: relative;
+            z-index: 1;
+            overflow: hidden;
+        }
+
+        .meeting-btn::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.3);
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+
+        .meeting-btn:hover::before {
+            width: 300px;
+            height: 300px;
+        }
+
+        .meeting-btn:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 12px 35px rgba(57, 169, 0, 0.5);
+        }
+
+        .meeting-btn i {
+            font-size: 1.2rem;
+            animation: arrowMove 1.5s ease-in-out infinite;
+        }
+
+        @keyframes arrowMove {
+
+            0%,
+            100% {
+                transform: translateX(0);
+            }
+
+            50% {
+                transform: translateX(5px);
+            }
+        }
+
+        .quote-section {
+            background:
+                linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(255, 255, 255, 0.85) 100%),
+                url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100"><rect fill="%23f4e7d7" width="100" height="100"/><path d="M0,0 L100,100 M100,0 L0,100" stroke="%23e6d4b8" stroke-width="0.5" opacity="0.3"/></svg>');
+            background-color: #f4e7d7;
+            padding: 12px 40px;
+            border-radius: 0;
+            text-align: center;
+            font-style: italic;
+            box-shadow:
+                inset 0 2px 8px rgba(0, 0, 0, 0.08),
+                inset 0 -2px 8px rgba(0, 0, 0, 0.08);
+            animation: fadeIn 1s ease-out 0.8s both;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            margin: 0;
+        }
+
+        @media (max-width: 768px) {
+            .quote-section {
+                padding: 10px 20px;
+                gap: 5px;
+            }
+        }
+
+        /* Textura de papiro antiguo */
+        .quote-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image:
+                repeating-linear-gradient(0deg,
+                    transparent,
+                    transparent 2px,
+                    rgba(139, 90, 43, 0.03) 2px,
+                    rgba(139, 90, 43, 0.03) 3px),
+                repeating-linear-gradient(90deg,
+                    transparent,
+                    transparent 2px,
+                    rgba(139, 90, 43, 0.02) 2px,
+                    rgba(139, 90, 43, 0.02) 3px);
+            pointer-events: none;
+            opacity: 0.6;
+        }
+
+        /* Manchas de envejecimiento */
+        .quote-section::after {
+            content: '';
+            position: absolute;
+            top: 15px;
+            right: 25px;
+            width: 60px;
+            height: 60px;
+            background: radial-gradient(circle, rgba(139, 90, 43, 0.06) 0%, transparent 60%);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+
+        .quote-content {
+            position: relative;
+            z-index: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+            max-width: 1000px;
+            width: 100%;
+        }
+
+        .quote-main-wrapper {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 25px;
+            flex-wrap: nowrap;
+            width: 100%;
+        }
+
+        @media (max-width: 768px) {
+            .quote-main-wrapper {
+                flex-direction: column;
+                gap: 8px;
+            }
+        }
+
+        .quote-text-wrapper {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .quote-text {
+            position: relative;
+            color: #2d3436;
+            font-size: 0.95rem;
+            margin: 0;
+            line-height: 1.3;
+            font-family: 'Georgia', 'Times New Roman', serif;
+            font-weight: 500;
+            letter-spacing: 0.3px;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.05);
+            font-style: italic;
+        }
+
+        /* Efecto de escritura con tinta que se repite infinitamente */
+        .quote-text {
+            background: linear-gradient(to right, #003d5c 0%, #003d5c 100%);
+            background-size: 0% 100%;
+            background-repeat: no-repeat;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: writeTextLoop 6s ease-in-out infinite;
+        }
+
+        @keyframes writeTextLoop {
+            0% {
+                background-size: 0% 100%;
+            }
+
+            50% {
+                background-size: 100% 100%;
+            }
+
+            100% {
+                background-size: 100% 100%;
+            }
+        }
+
+        .quote-author-wrapper {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+        }
+
+        .quote-author {
+            position: relative;
+            color: #5a5a5a;
+            font-size: 0.9rem;
+            font-style: normal;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            padding: 5px 0;
+            padding-left: 10px;
+            border-left: 3px solid #39a900;
+            white-space: nowrap;
+        }
+
+        .quote-author::before {
+            content: '— ';
+            color: #39a900;
+            font-weight: bold;
+            font-size: 0.95rem;
+        }
+
+        /* Decoración con diamantes */
+        .quote-flourish {
+            margin: 6px 0;
+            width: 90px;
+            height: 2px;
+            background: linear-gradient(to right, transparent, #39a900, transparent);
+            position: relative;
+        }
+
+        .quote-flourish::before,
+        .quote-flourish::after {
+            content: '◆';
+            position: absolute;
+            color: #39a900;
+            font-size: 0.65rem;
+            top: -5px;
+            text-shadow: 0 0 5px rgba(57, 169, 0, 0.3);
+        }
+
+        .quote-flourish::before {
+            left: -14px;
+        }
+
+        .quote-flourish::after {
+            right: -14px;
+        }
+
+        /* Contenedor de la imagen de pluma escribiendo */
+        .quote-image-container {
+            position: relative;
+            z-index: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        /* Ocultar imagen en móviles */
+        @media (max-width: 768px) {
+            .quote-image-container {
+                display: none;
+            }
+        }
+
+        /* Ilustración de pluma escribiendo */
+        .writing-pen-illustration {
+            width: 45px;
+            height: 45px;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Pluma emoji con animación */
+        .feather-emoji {
+            font-size: 2.3rem;
+            filter: drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.2));
+            animation: penWiggle 3s ease-in-out infinite;
+            display: block;
+        }
+
+        @keyframes penWiggle {
+
+            0%,
+            100% {
+                transform: rotate(-8deg) translateY(0);
+            }
+
+            50% {
+                transform: rotate(-12deg) translateY(-5px);
+            }
+        }
+
+        .footer {
+            background: linear-gradient(135deg, #003d5c 0%, #00597a 100%);
+            padding: 4px 25px;
+            text-align: center;
+            color: white;
+        }
+
+        .footer p {
+            margin: 0;
+        }
+
+        .footer .name {
+            font-size: 1rem;
+            font-weight: 700;
+            color: #39a900;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 7px;
+        }
+
+        .footer .role {
+            display: none;
+        }
+
+        @media (max-width: 767px) {
+            .session-container {
+                border-radius: 0;
+            }
+
+            .content-grid {
+                padding: 20px 15px;
+            }
+
+            .header-section {
+                padding: 15px 15px;
+            }
+
+            .meeting-time {
+                font-size: 2rem;
+            }
+
+            .evidence-item {
+                padding: 15px;
+            }
+
+            .meeting-btn {
+                padding: 12px 25px;
+                font-size: 0.9rem;
+            }
+
+            .quote-text {
+                font-size: 0.95rem;
+                line-height: 1.4;
+            }
+
+            .quote-author {
+                font-size: 0.8rem;
+                padding: 4px 0 4px 8px;
+                border-left-width: 3px;
+            }
+
+            .quote-flourish {
+                width: 70px;
+                margin: 5px 0;
+            }
+
+            .quote-main-wrapper {
+                gap: 6px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Partículas flotantes -->
+    <div class="floating-particles">
+        <div class="particle">{ }</div>
+        <div class="particle">&lt;/&gt;</div>
+        <div class="particle">[ ]</div>
+        <div class="particle">( )</div>
+        <div class="particle">===</div>
+        <div class="particle">{ }</div>
+        <div class="particle">&lt;/&gt;</div>
+    </div>
+
+    <div class="session-container">
+        <div class="header-accent"></div>
+
+        <div class="header-section">
+            <div class="header-title-row">
+                <h1>
+                    <span class="code-tag">&lt;</span>Sesión en línea 3&nbsp;<span class="code-tag">/&gt;</span> 
+                &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Experimento de aplicación</h1>
+                <div class="date-badge">
+                    <i class="fas fa-calendar-alt">&nbsp;</i>
+                Miércoles 7 de Octubre 2026</div>
+          </div>
+            <p class="subtitle">Fase de Evaluación</p>
+        </div>
+
+        <div class="content-wrapper">
+            <div class="content-grid">
+                <div class="main-content">
+                    <p class="greeting">
+                        Cordial saludo, apreciados aprendices, el <strong>miércoles 7 de Octubre de 2026 a las 6:30
+                            p.m.</strong>
+                    </p>
+
+                    <p class="greeting">
+                        <strong>Tendremos un espacio para socializar las evidencias:</strong>
+                    </p>
+
+                    <h3>
+                        <i class="fas fa-clipboard-list"></i>
+                      Evidencias de la Semana
+                  </h3>
+
+                    <div class="evidence-list">
+                
+						      <div class="evidence-item">
+                            <div class="evidence-header">
+                                <div class="evidence-icon">
+                                   <i class="fas fa-flask"></i>
+                                </div>
+                              <div class="evidence-content">
+                                    <div class="evidence-left-column">
+                                        <div class="evidence-code">GA7-220201501-AA4-EV01</div>
+                                        <div class="evidence-dates">
+                                            <i class="fas fa-clock"></i>
+                                            <strong>Inicio:</strong> 5/10/26 • <strong>Finaliza:</strong> 11/10/26
+                                        </div>
+                                    </div>
+                                    <div class="evidence-description">Video-expositivo sobre experimento de aplicación</div>
+                              </div>
+                            </div>
+                        </div>
+
+			   
+                    </div>
+
+                    <div class="meeting-card" style="margin-top: 20px;">
+                        <h3>
+                            <i class="fas fa-video meeting-icon"></i>
+                            Únete a la sesión
+                        </h3>
+                        <div class="meeting-time">6:30 PM</div>
+                        <p class="meeting-description">Te esperamos en Microsoft Teams</p>
+                        <a href="https://teams.microsoft.com/meet/270634388373400?p=ovSkjecGzyi7Hpiuxj" target="_blank"
+                            class="meeting-btn" rel="noreferrer noopener">
+                            <span>Ingresar ahora</span>
+                            <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="sidebar">
+                    <div style="text-align: center;">
+						
+                        <img src="https://drive.google.com/thumbnail?id=1f_xND8QHnVdH9JmWOjqRuyasucMyNwRg&sz=w1000"
+                            alt="Programación Web" class="sidebar-image">
+                        <p style="font-size: 0.7rem; color: #666; margin-top: 8px; margin-bottom: 0;">
+                            Imagen SENA&nbsp; &nbsp;- <a href="https://www.freepik.es" target="_blank"
+                                style="color: #39a900; text-decoration: none;">www.sena.edu.co</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Material de formación - Nueva ubicación arriba de la quote -->
+        <div class="material-section">
+            <div class="material-wrapper">
+                <div class="material-box">
+                    <i class="fas fa-book-open"></i>
+                    <div class="material-box-text">
+                        <strong>Material de formación:</strong> La ciencia de las cosas de la <strong>Guía de aprendizaje 7</strong>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="quote-section">
+            <div class="quote-content">
+                <div class="quote-main-wrapper">
+                    <div class="quote-text-wrapper">
+                        <p class="quote-text">La teoría es cuando se sabe todo, pero nada funciona; <br>la práctica es cuando todo funciona, pero nadie sabe por qué</p>
+                        <div class="quote-flourish"></div>
+                    </div>
+                    <div class="quote-image-container">
+                        <div class="writing-pen-illustration">
+                            <span class="feather-emoji">🪶</span>
+                        </div>
+                    </div>
+                    <div class="quote-author-wrapper">
+                        <div class="quote-author">&nbsp;Albert Einstein</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="header-accent"></div>
+
+        <div class="footer">
+            <p class="name">
+                <i class="fas fa-user-tie"></i>
+                Fabián Alexander García Martínez
+            </p>
+            <p class="role">Instructor Técnico - Vocero</p>
+        </div>
+
+        <div class="header-accent"></div>
+    </div>
+</body>
+
+</html>
